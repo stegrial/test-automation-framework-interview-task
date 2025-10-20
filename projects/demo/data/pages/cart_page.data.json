@@ -1,0 +1,10 @@
+{
+  "pageTitle": "//span[@class='title']",
+  "cartItem": "//div[@class='cart_item']",
+  "cartItemName": "//div[@class='inventory_item_name']",
+  "cartItemPrice": "//div[@class='inventory_item_price']",
+  "removeButton": "//button[contains(@class, 'cart_button')]",
+  "continueShoppingButton": "//button[@id='continue-shopping']",
+  "checkoutButton": "//button[@id='checkout']"
+}
+

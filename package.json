@@ -1,0 +1,31 @@
+{
+  "author": "me",
+  "devDependencies": {
+    "@cucumber/cucumber": "^9.5.1",
+    "@cucumber/pretty-formatter": "^1.0.0",
+    "@playwright/test": "^1.38.0",
+    "@types/node": "^24.7.2",
+    "@typescript-eslint/eslint-plugin": "^5.47.0",
+    "@typescript-eslint/parser": "^5.47.0",
+    "allure-cucumberjs": "^2.8.1",
+    "allure-js-commons": "^2.8.1",
+    "eslint": "^8.30.0",
+    "eslint-config-google": "^0.14.0",
+    "ts-node": "^10.9.1"
+  },
+  "name": "test-automation-framework",
+  "config": {
+    "cucumberjs_server": "cucumber-js --profile regression --parallel 4 headless"
+  },
+  "scripts": {
+    "test": "cucumber-js --profile local",
+    "test:headless": "cucumber-js --profile local headless",
+    "regression:desktop": "$npm_package_config_cucumberjs_server --tags '@device:desktop and @auto:automated' desktop",
+    "regression:tablet": "$npm_package_config_cucumberjs_server --tags '@device:tablet and @auto:automated' tablet",
+    "regression:mobile": "$npm_package_config_cucumberjs_server --tags '@device:mobile and @auto:automated' mobile",
+    "upgrade": "ncu --upgrade",
+    "allure-generate": "allure generate ./reports/allure-results -o ./allure_html_report --clean"
+  },
+  "version": "0.0.1",
+  "description": "Framework for automating UI tests using CucumberJS and Playwright"
+}

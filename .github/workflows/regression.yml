@@ -1,0 +1,71 @@
+name: "Regression"
+
+on: 
+  workflow_dispatch:
+    inputs:
+      project_name:
+        type: string
+        required: true
+        description: Project name
+      project_environment:
+        type: string
+        required: true
+        default: default
+        description: Project environment
+      device:
+        type: choice
+        required: true
+        default: 'desktop'
+        description: Set device
+        options: 
+          - desktop
+          - mobile
+          - tablet
+      browser:
+        type: choice
+        required: true
+        default: 'chromium'
+        description: Set browser
+        options: 
+          - chromium
+          - webkit
+          - firefox
+      additional_tags:
+        type: string
+        default: ''
+        description: Additional cucumber tags
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  regression:
+    name: ${{ inputs.project_name }} regression on ${{ inputs.device }} ${{ inputs.browser }} 
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm install
+      - name: Browsers install
+        run: npx playwright install --with-deps
+      - name: Run tests
+        continue-on-error: true
+        run: PARAMS="${{ inputs.additional_tags }}" npm run regression:${{ inputs.device }} project=${{ inputs.project_name }} env=${{ inputs.project_environment }} ${{ inputs.browser }}
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Install Allure command line tools
+        run: npm install -g allure-commandline --save-dev
+      - name: Generating report
+        run: npm run allure-generate
+      - name: Archive report
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report-${{ inputs.project_name }}-${{ inputs.device }}-${{ inputs.browser }}
+          path: allure_html_report

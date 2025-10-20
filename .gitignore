@@ -1,0 +1,14 @@
+/.idea
+node_modules
+/.vscode
+package-lock.json
+.DS_Store
+tmp
+/modules/cucumber-runner/*.vsix
+/modules/cucumber-runner/node_modules
+/modules/cucumber-runner/out
+/modules/.bundle
+/modules/usr/
+/modules/vendor
+Gemfile.lock
+justfile

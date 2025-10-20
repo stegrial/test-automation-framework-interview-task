@@ -1,0 +1,13 @@
+{
+  "pageTitle": "//span[@class='title']",
+  "productItem": "//div[@class='inventory_item']",
+  "productName": "//div[@class='inventory_item_name']",
+  "productPrice": "//div[@class='inventory_item_price']",
+  "addToCartButton": "//button[contains(@class, 'btn_inventory')]",
+  "shoppingCartBadge": "//span[@class='shopping_cart_badge']",
+  "shoppingCartLink": "//a[@class='shopping_cart_link']",
+  "sortDropdown": "//select[@class='product_sort_container']",
+  "hamburgerMenu": "//button[@id='react-burger-menu-btn']",
+  "logoutLink": "//a[@id='logout_sidebar_link']"
+}
+
