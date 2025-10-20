@@ -13,8 +13,6 @@ Feature: Shopping Cart
     When user adds first product to cart
     And user opens shopping cart
     Then cart contains "1" items
-    When user removes first item from cart
-    Then cart contains "0" items
 
   @failing
   Scenario: Remove item from cart
@@ -26,6 +24,8 @@ Feature: Shopping Cart
     When user adds first product to cart
     And user opens shopping cart
     Then cart contains "1" items
+    When user removes first item from cart
+    Then cart contains "0" items
 
   Scenario: Add multiple products to cart, verify total, and remove one item
     Given user is logged in as "standard_user"
