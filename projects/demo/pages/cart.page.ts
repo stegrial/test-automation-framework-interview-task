@@ -27,5 +27,28 @@ export class DemoCartPage extends Page {
   async removeFirstItem() {
     await page.locator(this.getPageElement('removeButton')).first().click();
   }
-}
 
+  /**
+   * Get cart total amount
+   * @return {Promise<number>} Cart total amount
+   */
+  async getCartTotal(): Promise<number> {
+    const cartItems = await page.locator(this.getPageElement('cartItem')).all();
+    let total = 0;
+    
+    for (const item of cartItems) {
+      const priceText = await item.locator(this.getPageElement('cartItemPrice')).textContent();
+      const price = parseFloat(priceText?.replace('$', '') || '0');
+      total += price;
+    }
+    
+    return total;
+  }
+
+  /**
+   * Click Continue Shopping
+   */
+  async continueShopping() {
+    await this.clickElement('continueShoppingButton');
+  }
+}
